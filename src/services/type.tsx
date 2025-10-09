@@ -6,7 +6,7 @@ export interface NamedAPIResource {
 }
 
 export interface PokemonTypeResponse {
-  damage_relations: any; // si necesitás, podés tiparlo mejor
+  damage_relations: unknown; // si necesitás, podés tiparlo mejor
   pokemon: {
     pokemon: NamedAPIResource;
     slot: number;
