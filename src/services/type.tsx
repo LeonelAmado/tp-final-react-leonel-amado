@@ -16,4 +16,6 @@ export interface PokemonTypeResponse {
 export interface PokemonByType {
   name: string;
   url: string;
+  sprite?: string; // ← Agregar sprite opcional
+  id?: number; // ← Agregar ID opcional
 }
