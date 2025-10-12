@@ -7,6 +7,7 @@ import App from "./App";
 const Home = lazy(() => import("./pages/Home"));
 const Detalle = lazy(() => import("./pages/Detalle"));
 const Listado = lazy(() => import("./pages/Listado"));
+const Favoritos = lazy(() => import("./pages/Favoritos"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 export const router = createBrowserRouter([
@@ -28,6 +29,14 @@ export const router = createBrowserRouter([
         element: (
           <Suspense fallback={<div>Cargando...</div>}>
             <Listado />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/favoritos/",
+        element: (
+          <Suspense fallback={<div>Cargando...</div>}>
+            <Favoritos />
           </Suspense>
         ),
       },
