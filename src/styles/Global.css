@@ -1,0 +1,302 @@
+/* Global Responsive Base - Global.css */
+
+/* CSS Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  line-height: 1.6;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Responsive Images */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Responsive Text */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.2;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+p,
+li {
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Responsive Containers */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 5vw, 2rem);
+}
+
+/* Responsive Grid Utilities */
+.grid {
+  display: grid;
+  gap: clamp(1rem, 3vw, 2rem);
+}
+
+.grid-auto {
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+}
+
+.grid-responsive {
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+}
+
+/* Responsive Flex Utilities */
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(0.5rem, 2vw, 1rem);
+}
+
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+/* Responsive Spacing */
+.space-y-sm > * + * {
+  margin-top: clamp(0.5rem, 2vw, 1rem);
+}
+.space-y-md > * + * {
+  margin-top: clamp(1rem, 3vw, 1.5rem);
+}
+.space-y-lg > * + * {
+  margin-top: clamp(1.5rem, 4vw, 2rem);
+}
+
+.space-x-sm > * + * {
+  margin-left: clamp(0.5rem, 2vw, 1rem);
+}
+.space-x-md > * + * {
+  margin-left: clamp(1rem, 3vw, 1.5rem);
+}
+.space-x-lg > * + * {
+  margin-left: clamp(1.5rem, 4vw, 2rem);
+}
+
+/* Responsive Padding */
+.p-responsive {
+  padding: clamp(1rem, 4vw, 2rem);
+}
+.px-responsive {
+  padding-left: clamp(1rem, 4vw, 2rem);
+  padding-right: clamp(1rem, 4vw, 2rem);
+}
+.py-responsive {
+  padding-top: clamp(1rem, 4vw, 2rem);
+  padding-bottom: clamp(1rem, 4vw, 2rem);
+}
+
+/* Responsive Margin */
+.m-responsive {
+  margin: clamp(1rem, 4vw, 2rem);
+}
+.mx-responsive {
+  margin-left: clamp(1rem, 4vw, 2rem);
+  margin-right: clamp(1rem, 4vw, 2rem);
+}
+.my-responsive {
+  margin-top: clamp(1rem, 4vw, 2rem);
+  margin-bottom: clamp(1rem, 4vw, 2rem);
+}
+
+/* Responsive Typography */
+.text-responsive-sm {
+  font-size: clamp(0.8rem, 2vw, 1rem);
+}
+.text-responsive {
+  font-size: clamp(1rem, 3vw, 1.2rem);
+}
+.text-responsive-lg {
+  font-size: clamp(1.2rem, 4vw, 1.5rem);
+}
+.text-responsive-xl {
+  font-size: clamp(1.5rem, 5vw, 2rem);
+}
+.text-responsive-2xl {
+  font-size: clamp(2rem, 6vw, 3rem);
+}
+
+/* Hide/Show on different screen sizes */
+.hide-mobile {
+  display: block;
+}
+.show-mobile {
+  display: none;
+}
+.hide-tablet {
+  display: block;
+}
+.show-tablet {
+  display: none;
+}
+.hide-desktop {
+  display: block;
+}
+.show-desktop {
+  display: none;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .hide-mobile {
+    display: none;
+  }
+  .show-mobile {
+    display: block;
+  }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hide-tablet {
+    display: none;
+  }
+  .show-tablet {
+    display: block;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .hide-desktop {
+    display: none;
+  }
+  .show-desktop {
+    display: block;
+  }
+}
+
+/* Responsive Buttons */
+.btn-responsive {
+  padding: clamp(0.5rem, 2vw, 0.75rem) clamp(1rem, 4vw, 1.5rem);
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
+  border-radius: clamp(6px, 2vw, 10px);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Responsive Cards */
+.card-responsive {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: clamp(12px, 3vw, 20px);
+  padding: clamp(1rem, 4vw, 2rem);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.card-responsive:hover {
+  transform: translateY(-2px);
+}
+
+/* Responsive Form Elements */
+input,
+textarea,
+select,
+button {
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  padding: clamp(0.5rem, 2vw, 0.75rem);
+  border-radius: clamp(6px, 1.5vw, 8px);
+}
+
+/* Responsive Tables */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive table {
+  width: 100%;
+  min-width: 600px;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .card-responsive {
+    border: 2px solid #ffffff;
+    background: rgba(0, 0, 0, 0.8);
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+  }
+}
+
+/* Print styles */
+@media print {
+  * {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+  }
+
+  .hide-print {
+    display: none !important;
+  }
+}

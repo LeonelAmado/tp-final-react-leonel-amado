@@ -8,13 +8,13 @@ export interface PokemonByPoke {
   id: number;
   url: string;
 }
+
 export interface PokemonDetail {
   id: number;
   name: string;
   sprites: {
     other: {
       "official-artwork": {
-        // ← Cambiar de "oficial-atwork" a "official-artwork"
         front_default: string;
       };
     };
@@ -28,7 +28,24 @@ export interface PokemonDetail {
   }>;
   height: number;
   weight: number;
+  abilities: Array<{
+    ability: {
+      name: string;
+      url: string;
+    };
+    is_hidden: boolean;
+    slot: number;
+  }>;
+  stats: Array<{
+    base_stat: number;
+    effort: number;
+    stat: {
+      name: string;
+      url: string;
+    };
+  }>;
 }
+
 // En detail.tsx - agregar estas interfaces
 export interface PokemonTypeItem {
   pokemon: {
