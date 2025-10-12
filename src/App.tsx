@@ -13,8 +13,8 @@ export default function App({ children }: { children?: React.ReactNode }) {
             <NavLink to="/listado" className="nav-link">
               Listado
             </NavLink>
-            <NavLink to="/detalle/1" className="nav-link">
-              Detalle
+            <NavLink to="/favoritos" className="nav-link">
+              💫 Favoritos
             </NavLink>
           </div>
         </nav>

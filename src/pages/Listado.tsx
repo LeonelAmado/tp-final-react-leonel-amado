@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { fetchPokemonByType } from "../services/pokemonType";
+import { useFavorites } from "../hooks/useFavorites";
 import type { PokemonByType } from "../services/type";
 import "./Listado.css";
 
@@ -12,6 +13,20 @@ export default function Listado() {
   const [selectedType, setSelectedType] = useState<string>("fire");
   const [currentLimit, setCurrentLimit] = useState<number>(20);
   const [hasMorePokemon, setHasMorePokemon] = useState<boolean>(true);
+
+  // Hook de favoritos
+  const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
+
+  // Función para manejar favoritos
+  const handleFavoriteToggle = (pokemon: PokemonByType) => {
+    if (!pokemon.id) return; // Validación de seguridad
+
+    if (isFavorite(pokemon.id)) {
+      removeFromFavorites(pokemon.id);
+    } else {
+      addToFavorites(pokemon);
+    }
+  };
 
   // Lista de tipos de Pokémon
   const pokemonTypes = [
@@ -108,11 +123,13 @@ export default function Listado() {
                 disabled={loading || loadingMore}
                 className="type-button"
                 style={{
-                  background: selectedType === type.name 
-                    ? `linear-gradient(135deg, ${type.color}, ${type.color}dd)`
-                    : "rgba(255, 255, 255, 0.1)",
+                  background:
+                    selectedType === type.name
+                      ? `linear-gradient(135deg, ${type.color}, ${type.color}dd)`
+                      : "rgba(255, 255, 255, 0.1)",
                   color: selectedType === type.name ? "white" : "#374151",
-                  borderColor: selectedType === type.name ? type.color : "#d1d5db",
+                  borderColor:
+                    selectedType === type.name ? type.color : "#d1d5db",
                 }}
               >
                 {type.label}
@@ -127,7 +144,9 @@ export default function Listado() {
             Pokémon de tipo{" "}
             <span
               style={{
-                color: pokemonTypes.find((t) => t.name === selectedType)?.color || "#fbbf24"
+                color:
+                  pokemonTypes.find((t) => t.name === selectedType)?.color ||
+                  "#fbbf24",
               }}
             >
               {pokemonTypes.find((t) => t.name === selectedType)?.label}
@@ -154,7 +173,7 @@ export default function Listado() {
         {error && (
           <div className="error-container">
             <p className="error-text">Error: {error}</p>
-            <button 
+            <button
               className="retry-button"
               onClick={() => loadPokemonByType(selectedType)}
             >
@@ -168,24 +187,41 @@ export default function Listado() {
           <>
             <div className="pokemon-grid">
               {pokemonList.map((pokemon) => (
-                <div 
-                  key={pokemon.name} 
+                <div
+                  key={pokemon.name}
                   className="pokemon-card"
-                  style={{
-                    "--type-color": pokemonTypes.find((t) => t.name === selectedType)?.color || "#fbbf24"
-                  } as React.CSSProperties}
+                  style={
+                    {
+                      "--type-color":
+                        pokemonTypes.find((t) => t.name === selectedType)
+                          ?.color || "#fbbf24",
+                    } as React.CSSProperties
+                  }
                 >
+                  {/* Botón de favoritos */}
+                  <button
+                    onClick={() => handleFavoriteToggle(pokemon)}
+                    className={`favorite-button ${
+                      pokemon.id && isFavorite(pokemon.id) ? "is-favorite" : ""
+                    }`}
+                    title={
+                      pokemon.id && isFavorite(pokemon.id)
+                        ? "Quitar de favoritos"
+                        : "Agregar a favoritos"
+                    }
+                  >
+                    {pokemon.id && isFavorite(pokemon.id) ? "⭐" : "☆"}
+                  </button>
+
                   {/* Sprite del Pokémon */}
                   {pokemon.sprite ? (
-                    <img 
-                      src={pokemon.sprite} 
+                    <img
+                      src={pokemon.sprite}
                       alt={pokemon.name}
                       className="pokemon-sprite"
                     />
                   ) : (
-                    <div className="pokemon-placeholder">
-                      Sin imagen
-                    </div>
+                    <div className="pokemon-placeholder">Sin imagen</div>
                   )}
 
                   {/* Nombre del Pokémon */}
@@ -205,10 +241,12 @@ export default function Listado() {
                       className="pokemon-detail-button"
                       style={{
                         background: `linear-gradient(135deg, ${
-                          pokemonTypes.find((t) => t.name === selectedType)?.color || "#3b82f6"
+                          pokemonTypes.find((t) => t.name === selectedType)
+                            ?.color || "#3b82f6"
                         }, ${
-                          pokemonTypes.find((t) => t.name === selectedType)?.color || "#1d4ed8"
-                        }dd)`
+                          pokemonTypes.find((t) => t.name === selectedType)
+                            ?.color || "#1d4ed8"
+                        }dd)`,
                       }}
                     >
                       Ver Detalle
@@ -226,13 +264,15 @@ export default function Listado() {
                   disabled={loadingMore}
                   className="load-more-button"
                   style={{
-                    background: loadingMore 
-                      ? "#9ca3af" 
+                    background: loadingMore
+                      ? "#9ca3af"
                       : `linear-gradient(135deg, ${
-                          pokemonTypes.find((t) => t.name === selectedType)?.color || "#3b82f6"
+                          pokemonTypes.find((t) => t.name === selectedType)
+                            ?.color || "#3b82f6"
                         }, ${
-                          pokemonTypes.find((t) => t.name === selectedType)?.color || "#1d4ed8"
-                        }dd)`
+                          pokemonTypes.find((t) => t.name === selectedType)
+                            ?.color || "#1d4ed8"
+                        }dd)`,
                   }}
                 >
                   {loadingMore ? (
@@ -247,10 +287,12 @@ export default function Listado() {
                     </>
                   )}
                 </button>
-                
+
                 {loadingMore && (
                   <p className="load-more-text">
-                    Cargando más Pokémon de tipo {pokemonTypes.find((t) => t.name === selectedType)?.label}...
+                    Cargando más Pokémon de tipo{" "}
+                    {pokemonTypes.find((t) => t.name === selectedType)?.label}
+                    ...
                   </p>
                 )}
               </div>

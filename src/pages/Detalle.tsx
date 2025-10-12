@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { fetchPokemonDetail } from "../services/pokemonDetail";
+import { useFavorites } from "../hooks/useFavorites";
 import type { PokemonDetail } from "../services/detail";
 import "./Detalle.css";
 
@@ -9,6 +10,28 @@ export default function Detalle() {
   const [pokemon, setPokemon] = React.useState<PokemonDetail | null>(null);
   const [loading, setLoading] = React.useState<boolean>(true);
   const [error, setError] = React.useState<string | null>(null);
+
+  // Hook de favoritos
+  const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
+
+  // Función para manejar favoritos
+  const handleFavoriteToggle = () => {
+    if (!pokemon) return;
+
+    const pokemonForFavorites = {
+      id: pokemon.id,
+      name: pokemon.name,
+      url: `https://pokeapi.co/api/v2/pokemon/${pokemon.id}/`,
+      sprites: pokemon.sprites,
+      types: pokemon.types,
+    };
+
+    if (isFavorite(pokemon.id)) {
+      removeFromFavorites(pokemon.id);
+    } else {
+      addToFavorites(pokemonForFavorites);
+    }
+  };
 
   useEffect(() => {
     if (id) {
@@ -76,9 +99,24 @@ export default function Detalle() {
         {/* Header del Pokémon */}
         <div className="pokemon-header">
           <h1 className="pokemon-title">{pokemon.name}</h1>
-          <span className="pokemon-id-badge">
-            #{pokemon.id.toString().padStart(3, "0")}
-          </span>
+          <div className="pokemon-header-actions">
+            <span className="pokemon-id-badge">
+              #{pokemon.id.toString().padStart(3, "0")}
+            </span>
+            <button
+              onClick={handleFavoriteToggle}
+              className={`favorite-button-detail ${
+                isFavorite(pokemon.id) ? "is-favorite" : ""
+              }`}
+              title={
+                isFavorite(pokemon.id)
+                  ? "Quitar de favoritos"
+                  : "Agregar a favoritos"
+              }
+            >
+              {isFavorite(pokemon.id) ? "⭐" : "☆"}
+            </button>
+          </div>
         </div>
 
         {/* Imagen del Pokémon */}

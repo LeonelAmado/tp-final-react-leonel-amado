@@ -219,6 +219,49 @@
   transform: scale(1.05);
 }
 
+/* Botón de favoritos */
+.favorite-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+.favorite-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.favorite-button.is-favorite {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: white;
+  animation: favoriteAdded 0.3s ease;
+}
+
+@keyframes favoriteAdded {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .pokemon-placeholder {
   width: 150px;
   height: 150px;

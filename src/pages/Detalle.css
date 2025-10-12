@@ -77,6 +77,14 @@
   position: relative;
 }
 
+.pokemon-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
 .pokemon-title {
   font-size: 3rem;
   font-weight: 800;
@@ -84,7 +92,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin: 0 0 0.5rem 0;
+  margin: 0;
   text-transform: capitalize;
   text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
@@ -99,6 +107,46 @@
   font-weight: 600;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Botón de favoritos en página de detalle */
+.favorite-button-detail {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.favorite-button-detail:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.favorite-button-detail.is-favorite {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: white;
+  animation: favoriteAdded 0.3s ease;
+}
+
+@keyframes favoriteAdded {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* Imagen del Pokémon */
