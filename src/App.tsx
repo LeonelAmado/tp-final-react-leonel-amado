@@ -1,29 +1,29 @@
 import { Outlet, NavLink, ScrollRestoration } from "react-router-dom";
+import "./components/Header.css";
 
 export default function App({ children }: { children?: React.ReactNode }) {
   return (
     <div className="app">
       <header className="header">
         <nav>
-          <NavLink to="/" className="nav-link">
-            Home
-          </NavLink>
-          <NavLink to="/listado" className="nav-link">
-            Listado
-          </NavLink>
-          <NavLink to="/detalle/1" className="nav-link">
-            Detalle
-          </NavLink>
-          <NavLink to="/error" className="nav-link">
-            Not Found
-          </NavLink>
+          <div className="nav-links">
+            <NavLink to="/" className="nav-link">
+              Home
+            </NavLink>
+            <NavLink to="/listado" className="nav-link">
+              Listado
+            </NavLink>
+            <NavLink to="/detalle/1" className="nav-link">
+              Detalle
+            </NavLink>
+          </div>
         </nav>
       </header>
 
       <main className="main-content">{children ?? <Outlet />}</main>
       <ScrollRestoration />
       <footer className="footer">
-        <p>&copy; 2025 Mi Pokédex</p>
+        <p>&copy; 2025 Mi Pokédx - Explora el mundo Pokémon</p>
       </footer>
     </div>
   );
